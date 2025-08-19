@@ -93,6 +93,7 @@ def cadastro():
     
     # Loop para garantir que o usuário digite um CEP válido
     while True:
+        
         cep = input(f'{CYAN}CEP (8 dígitos): {RESET}')
         if len(cep) == 8 and cep.isdigit():
             break  # Se o CEP for válido, sai do loop
@@ -100,6 +101,7 @@ def cadastro():
     
     # Verificação do CPF
     cpf = input(f'{CYAN}CPF (apenas números): {RESET}')
+    
     if not verificar_cpf(cpf, estado):
         print(f'{RED}CPF inválido para o estado informado.{RESET}')
         return  # Corrigido: "return" estava incompleto
@@ -114,6 +116,7 @@ def cadastro():
     dia, mes, ano = map(int, data_nascimento.split('/'))
     
     idade = datetime.now().year - ano
+    
     if idade < 18:
         print(f'{RED}Você é menor de idade e não pode se cadastrar.{RESET}')
         return
@@ -125,28 +128,35 @@ def cadastro():
     salario = float(input(f'{CYAN}Salário: {RESET}'))
 
     funcionario = {
+        
         'Nome': nome, 'Endereço': endereco, 'Número': numero,
         'Bairro': bairro, 'Cidade': cidade, 'Estado': estado,
         'CEP': cep, 'CPF': cpf, 'Idade': idade,
         'Data de nascimento': data_nascimento, 'Dependentes': quantidade_dependentes,
         'Cargo': cargo, 'Salário': salario
     }
+    
     funcionarios.append(funcionario)
+    
     print(f'{GREEN}Funcionário {nome} cadastrado com sucesso!{RESET}')
+    
     limpar_terminal()
 
 # Função para listar funcionários
 
 def listar():
+    
     if funcionarios:
         print('='*40)
         print(f'{BLUE}LISTA DE FUNCIONÁRIOS CADASTRADOS:{RESET}')
         for indice, funcionario in enumerate(funcionarios, start=1):
             print(f'{indice}.\n{YELLOW}Nome: {funcionario["Nome"]}\nEndereço: {funcionario["Endereço"]}\nNúmero: {funcionario["Número"]}\nBairro: {funcionario["Bairro"]}\nCidade: {funcionario["Cidade"]}\nEstado: {funcionario["Estado"]}\nCEP: {funcionario["CEP"]}\nCPF: {funcionario["CPF"]}\nIdade: {funcionario["Idade"]}\nData de nascimento: {funcionario["Data de nascimento"]}\nDependentes: {funcionario["Dependentes"]}\nCargo: {funcionario["Cargo"]}\nSalário: {funcionario["Salário"]}{RESET}')
             print('='*40)
+    
     else:
         print(f'{RED}Nenhum funcionário cadastrado{RESET}')
         print('='*40)
+
 limpar_terminal()
 
 # Função para remover funcionários
